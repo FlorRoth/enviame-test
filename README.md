@@ -40,25 +40,26 @@ Una vez comenzada la revisión de tu prueba podríamos enviarte algunas pregunta
 
 ## Requerimiento:
 1. Desarrolle un microservicio (ms) de marketplace ecommerce basandose en el siguiente [modelo](https://drive.google.com/file/d/1Aua4AbtdwKLi5ab4u4lIFapOEfdJ9CXo/view?usp=sharing).
-2. En el sistema deben existir las siguientes entidades y reglas de negocio:
+2. En el sistema deben existir las siguientes entidades:
     - usuarios: USER
     - productos: PRODUCT
     - categorías de productos: CATEGORY
     - transacciones de compra: TRANSACTION
-    1. Un USER puede ser comprador (BUYER) y/o vendedor (SELLER).
-    2. Un USER es SELLER si existe al menos tiene un producto asociado.
-    3. Un USER es BUYER si existe al menos tiene una transacción de compra de producto.
-    4. Un producto siempre pertenece a una categoría y a un usuario, quien lo pone a la venta.
-    6. Una transacción siempre requiere a un usuario comprador y uno o mas productos comprados.
-    7. Un producto tiene una cantidad de unidades, las que se van descontantdo en la medida en que las unidades son compradas. Una vez que su cantidad llega a cero el producto cambia su status a inactivo. Solo se pueden comprar productos activos, y un producto estará activo si existen unidades disponibles de el. 
+3. En el sistema se deben implementar las siguientes reglas de negocio:    
+    - Un USER puede ser comprador (BUYER) y/o vendedor (SELLER).
+    - Un USER es SELLER si existe al menos tiene un producto asociado.
+    - Un USER es BUYER si existe al menos tiene una transacción de compra de producto.
+    - Un producto siempre pertenece a una categoría y a un usuario, quien lo pone a la venta.
+    - Una transacción siempre requiere a un usuario comprador y uno o mas productos comprados.
+    - Un producto tiene una cantidad de unidades, las que se van descontantdo en la medida en que las unidades son compradas. Una vez que su cantidad llega a cero el producto cambia su status a inactivo. Solo se pueden comprar productos activos, y un producto estará activo si existen unidades disponibles de el. 
 
-3. Desarrolle una API que implemente:
+4. Desarrolle una API que implemente:
     - CRUD de USER, PRODUCT, CATEGORY y TRANSACTION
     - Listado de BUYER USER
     - Listado de SELLER USER
     - Listado de CATEGORY relacionados con un BUYER USER
 
-4. Asegure lo siguiente:
+5. Asegure lo siguiente:
     - La creación de TRANSACTION descuente unidades de producto.
     - Cuando la cantidad de unidades de un producto llegue a cero ese producto se desactiva y no puede ser vendido hasta que se agreguen más unidades.
 

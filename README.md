@@ -39,7 +39,7 @@ En caso de cualquier pregunta técnica [contáctanos](mailto:tech-test@enviame.i
 Una vez comenzada la revisión de tu prueba podríamos enviarte algunas preguntas, por lo que apreciaremos tus respuestas oportunas.
 
 ## Requerimiento:
-1. Desarrolle un microservicio (ms) de marketplace ecommerce basandose en el siguiente modelo ![image](https://drive.google.com/file/d/1Aua4AbtdwKLi5ab4u4lIFapOEfdJ9CXo/view?usp=sharing).
+1. Desarrolle un microservicio (ms) de marketplace ecommerce basandose en el siguiente modelo ![image](backend%20test%20model.drawio.png).
 2. En el sistema deben existir las siguientes entidades:
     - usuarios: USER
     - productos: PRODUCT

@@ -71,14 +71,14 @@ Una vez comenzada la revisión de tu prueba podríamos enviarte algunas pregunta
 Es importante que escribas un archivo README.md con toda las instrucciones necesarias para ejecutar tu servicio, y una collección de postman o un archivo req.http con ejemplos e instrucciones para tu API adecuadamente. 
 **Si el README.md está incompleto y/o no proporcionas una colección de Postman o archivo req.http no podremos probar tu servicio, por lo que no podremos evaluar tu prueba**.
 
-- Funcionalidad (36 pts)
-- Documentación (8 pts)
+- Funcionalidad (45 pts)
+- Documentación (7 pts)
     - README.md 
     - Colección de Postman o archivo req.http
 - Estilo de programación (6 pts)
 - Uso apropiado de respuestas http (4 pts)
 - Manejo adecuado de errores y excepciones (4 pts)
-- Uso apropiado del template de Clean Archivtecture (6 pts)
+- Uso apropiado del template de Clean Archivtecture (4 pts)
 
 ## Aspectos que serán ignorados
 

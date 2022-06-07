@@ -28,7 +28,7 @@ Debes entregar la prueba en 72 horas (3 días)
     - Debes entregar un microservicio contenedorizado con las instrucciones apropiadas para ejecutar la servicio.
     - README.md con las instrucciones sobre como ejecutar tu app.
     - **Colección de Postman o archivo req.http** con ejemplos e instrucciones sobre como probar todos los endpoints de tu servicio.
-    - Archivo de variables de ambiente de ejemplo **(.env.example)** con todas las variables de entorno requeridas.
+    - Archivo de variables de ambiente de ejemplo **(no ignorar archivo .env)** con todas las variables de entorno requeridas.
     - Un archivo **Dockerfile y docker-compose.yml** necesarios para ejecutar tu servicio.
     - Provee un método para poblar la base de datos con datos de prueba.
 - Por favor, antes de entregar tu prueba, asegurate de probar tu servicio en un ambiente limpio desde el inicio, con esto te asegurarás de probar en similares condiciones que las que tendrá nuestro equipo Dev para revisar tu prueba. **Si no podemos ejecutar tu servicio, tu prueba será descartada inmediatamente**.

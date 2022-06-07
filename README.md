@@ -50,13 +50,15 @@ Una vez comenzada la revisión de tu prueba podríamos enviarte algunas pregunta
     - Un USER es SELLER si existe al menos tiene un producto asociado.
     - Un USER es BUYER si existe al menos tiene una transacción de compra de producto.
     - Un producto siempre pertenece a una categoría y a un usuario, quien lo pone a la venta.
+    - Un producto no puede estar en más de una categoría.
     - Una transacción siempre requiere a un usuario comprador y uno o mas productos comprados.
-    - Un producto tiene una cantidad de unidades, las que se van descontantdo en la medida en que las unidades son compradas. Una vez que su cantidad llega a cero el producto cambia su status a inactivo. Solo se pueden comprar productos activos, y un producto estará activo si existen unidades disponibles de el. 
+    - Un producto tiene una cantidad de unidades, las que se van descontando en la medida en que las unidades son compradas. Una vez que su cantidad llega a cero el producto cambia su status a inactivo. Solo se pueden comprar productos activos, y un producto estará activo si existen unidades disponibles de el.
+    - En el caso de una transacción cancelada se debe restituir el stock del producto. 
 
 4. Desarrolle una API que implemente:
     - CRUD de USER, PRODUCT, CATEGORY y TRANSACTION
-    - Listado de BUYER USER
-    - Listado de SELLER USER
+    - Listado de USER por tipo (BUYER y SELLER)
+    - Listado de transacciones por tipo de USER
     - Listado de CATEGORY relacionados con un BUYER USER
 
 5. Asegure lo siguiente:

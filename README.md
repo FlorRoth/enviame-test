@@ -14,7 +14,7 @@ Si no estás familiarizado con Docker, hemos compartido un template para Python 
 
 Te alentamos a que uses la plantilla provista y te recompensaremos con puntos adicionales las siguientes dos razones: 
 - Leer y entender el código escrito por otro desarrollador es una habilidad necesaria y que valoramos.
-- La comprensión de los principios de [clean architecture] es deseable.
+- Es deseable la comprensión de los principios de clean architecture.
 
 La plantilla proporciona bases de datos mysql, firestore y redis listas para usar. Sientente libre de usar cualquiera de estas herramientas o cualquier combinación de ellas.
 

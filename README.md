@@ -78,7 +78,7 @@ Es importante que escribas un archivo README.md con toda las instrucciones neces
 - Estilo de programación (6 pts)
 - Uso apropiado de respuestas http (4 pts)
 - Manejo adecuado de errores y excepciones (4 pts)
-- Uso apropiado del template de Clean Archivtecture (4 pts)
+- Uso apropiado del template de Clean Architecture (4 pts)
 
 ## Aspectos que serán ignorados
 

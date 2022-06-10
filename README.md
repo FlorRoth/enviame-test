@@ -5,9 +5,9 @@ La siguiente prueba requiere realizar el diseño y desarrollo de un microservici
 El proyecto está enfocado en los aspectos operacionales de un proceso de marketplace ecommerce típico, por lo tanto **debes descartar procesos relacionados a pago y facturación**.
 
 ## Requerimientos técnicos
-- Deberás elegir entre uno de los siguientes lenguajes + frameworks:
-    1. Python + flask
-    2. NodeJS + express
+Deberás elegir entre uno de los siguientes lenguajes + frameworks:
+1. Python + flask
+2. NodeJS + express
 
 - Deberás utilizar docker / docker-compose para proveer una aplicación Dockerizada.
 - La API desarrollada deberá considerar algún mecanismo de autenticación como: API Key, Bearer Token, Basic Auth, OAuth

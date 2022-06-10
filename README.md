@@ -2,13 +2,14 @@
 
 La siguiente prueba requiere realizar el diseño y desarrollo de un microservicio de marketplace ecommerce.
 
-El proyecto está enfocado en los aspectos operacionales de un proceso de marketplace ecommerce típico. Lo anterior implica que puedes descartar procesos relacionados a pago y facturación.
+El proyecto está enfocado en los aspectos operacionales de un proceso de marketplace ecommerce típico, por lo tanto **debes descartar procesos relacionados a pago y facturación**.
 
 ## Requerimientos técnicos
-Deberás elegir entre los siguientes lenguajes +  frameworks:
-- Python + flask
-- NodeJS + express
-- Deberás utilizar docker / docker-compose para proveer una aplicación contenedorizada y portable.
+- Deberás elegir entre uno de los siguientes lenguajes + frameworks:
+    1. Python + flask
+    2. NodeJS + express
+
+- Deberás utilizar docker / docker-compose para proveer una aplicación Dockerizada.
 - La API desarrollada deberá considerar algún mecanismo de autenticación como: API Key, Bearer Token, Basic Auth, OAuth
 Si no estás familiarizado con Docker, hemos compartido un template para Python y NodeJS. El que ha sido estructurado siguiendo los proncipios definidos por [clean architecture]
 
@@ -25,14 +26,14 @@ Debes entregar la prueba en 72 horas (3 días)
 
 - Entrega un **repositorio privado de GitHub** con tu código y agrega a los siguiente usuarios como colaboradores: **@rolivagon @rsebjara @vmolina-enviame @vham @rcarrascop**.
 - No te olvides de incluir:
-    - Debes entregar un microservicio contenedorizado con las instrucciones apropiadas para ejecutar la servicio.
+    - Debes entregar un microservicio Dockerizada con las instrucciones apropiadas para ejecutar la servicio.
     - README.md con las instrucciones sobre como ejecutar tu app.
     - **Colección de Postman o archivo req.http** con ejemplos e instrucciones sobre como probar todos los endpoints de tu servicio.
     - Archivo de variables de ambiente de ejemplo **(no ignorar archivo .env)** con todas las variables de entorno requeridas.
     - Un archivo **Dockerfile y docker-compose.yml** necesarios para ejecutar tu servicio.
     - Provee un método para poblar la base de datos con datos de prueba.
 - Por favor, antes de entregar tu prueba, asegurate de probar tu servicio en un ambiente limpio desde el inicio, con esto te asegurarás de probar en similares condiciones que las que tendrá nuestro equipo Dev para revisar tu prueba. **Si no podemos ejecutar tu servicio, tu prueba será descartada inmediatamente**.
-- Dado que se trata de una prueba de backend concéntrate en entregar una API donde podamos probar todas las funcionalidades requeridas.
+- Dado que se trata de una prueba de backend concéntrate en entregar una API donde podamos probar todas las funcionalidades requeridas. **No es necesario que desarrolles ninguna vista de frontend, ya que tampoco serán evaluadas**.
 
 En caso de cualquier pregunta técnica [contáctanos](mailto:tech-test@enviame.io)
 

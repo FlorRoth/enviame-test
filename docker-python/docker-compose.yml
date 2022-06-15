@@ -35,7 +35,7 @@ services:
       - ecommerce-firestore
   
   ecommerce-mysql:
-  
+    platform: linux/x86_64
     build: ${ECOMMERCE_SERVICE_PATH}/Docker/database/.
   
     restart: always
@@ -103,7 +103,7 @@ services:
       - delivery-firestore
   
   delivery-mysql:
-  
+    platform: linux/x86_64
     build: ${DELIVERY_SERVICE_PATH}/Docker/database/.
   
     restart: always

@@ -25,7 +25,7 @@ Debes entregar la prueba en 72 horas (3 días).
 
 ### Antes de comenzar
 
-Entrega un **repositorio privado de GitHub** con tu código y agrega a los siguientes usuarios como colaboradores: **@rolivagon @rsebjara @vmolina-enviame @vham @rcarrascop**.
+Entrega un **repositorio privado de GitHub** con tu código y agrega a los siguientes usuarios como colaboradores: **@rolivagon @rsebjara @vmolina-enviame @vham @rcarrascop @DixonOrtiz**.
 
 No te olvides de incluir en tu repositorio:
 

@@ -10,7 +10,7 @@ class SequelizeCategoriesRepository {
     
   
 
-    let tableName = "Categories";
+    let tableName = "categories";
 
     if (test) {
       tableName += "_test";

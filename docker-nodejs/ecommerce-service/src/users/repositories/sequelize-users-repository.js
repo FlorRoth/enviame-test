@@ -10,7 +10,7 @@ class SequelizeUsersRepository {
     
   
 
-    let tableName = "Users";
+    let tableName = "users";
 
     if (test) {
       tableName += "_test";

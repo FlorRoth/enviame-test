@@ -16,7 +16,7 @@ class ManageProductsUsecase {
   }
 
   async createProduct(data) {
-    const product = new Product(undefined, data.name, data.description,data.quantity,data.status,data.seller_user,data.category)
+    const product = new Product(undefined, data.name, data.description,data.quantity,data.status,data.UserId,data.CategoryId)
     const id = await this.productsRepository.createProduct(product);
     
     product.id = id;
@@ -27,7 +27,7 @@ class ManageProductsUsecase {
 
   async updateProduct(id, data) {
 
-    const product = new Product(id, data.name, data.description,data.quantity,data.status,data.seller_user,data.category);
+    const product = new Product(id, data.name, data.description,data.quantity,data.status,data.UserId,data.CategoryId);
     await this.productsRepository.updateProduct(product);
 
     return product;

@@ -10,7 +10,7 @@ class SequelizeProductsRepository {
     
   
 
-    let tableName = "Products";
+    let tableName = "products";
     
 
     if (test) {
@@ -31,22 +31,6 @@ class SequelizeProductsRepository {
       status: {
         type: DataTypes.ENUM('active', 'inactive'),
         defaultValue: 'active'
-      },
-      seller_user: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Users', 
-          key: 'id',
-        }
-      },
-      category: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-           model: 'Categories', 
-           key: 'id',
-         }
       }
 
     };

@@ -4,12 +4,15 @@ const SequelizeClient = require('./frameworks/db/sequelize');
 
 const createBooksRouter = require('./books/http/books-router');
 const createUsersRouter = require('./users/http/users-router');
+const createCategoriesRouter = require('./categories/http/categories-router');
 
 const ManageBooksUsecase = require('./books/usecases/manage-books-usecase');
 const ManageUsersUsecase = require('./users/usecases/manage-users-usecase');
+const ManageCategoriesUsecase = require('./categories/usecases/manage-categories-usecase');
 
 const SequelizeBooksRepository = require('./books/repositories/sequelize-books-repository');
 const SequelizeUsersRepository = require('./users/repositories/sequelize-users-repository');
+const SequelizeCategoriesRepository = require('./categories/repositories/sequelize-categories-repository');
 
 // Instanciar dependencias.
 
@@ -23,15 +26,18 @@ const sequelizeClient = new SequelizeClient();
 
 const sequelizeBooksRepository = new SequelizeBooksRepository(sequelizeClient);
 const sequelizeUsersRepository = new SequelizeUsersRepository(sequelizeClient);
+const sequelizeCategoriesRepository = new SequelizeCategoriesRepository(sequelizeClient);
 
 sequelizeClient.syncDatabase();
 
 const manageBooksUsecase = new ManageBooksUsecase(sequelizeBooksRepository);
 const manageUsersUsecase = new ManageUsersUsecase(sequelizeUsersRepository);
+const manageCategoriesUsecase = new ManageCategoriesUsecase(sequelizeCategoriesRepository);
 
 let routers = [
   createBooksRouter(manageBooksUsecase),
-  createUsersRouter(manageUsersUsecase)
+  createUsersRouter(manageUsersUsecase),
+  createCategoriesRouter(manageCategoriesUsecase)
 ];
   
 // Crear aplicación Express con dependencias inyectadas.

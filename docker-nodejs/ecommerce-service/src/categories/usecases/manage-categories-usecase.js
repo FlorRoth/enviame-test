@@ -27,7 +27,7 @@ class ManageCategoriesUsecase {
 
   async updateCategory(id, data) {
 
-    const category = new Category(id, data.name, data.email, data.password,data.is_admin);
+    const category = new Category(id, data.name, data.description);
     await this.categoriesRepository.updateCategory(category);
 
     return category;

@@ -1,0 +1,9 @@
+{
+    "development": {
+        "username": "root",
+        "password": "root",
+        "database": "clean_architecture_example",
+        "host": "ecommerce-mysql",
+        "dialect": "mysql"
+    }
+}

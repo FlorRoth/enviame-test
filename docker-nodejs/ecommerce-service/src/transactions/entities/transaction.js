@@ -1,4 +1,4 @@
-// Entidad usuario
+
 
 class Transaction {
 
@@ -9,15 +9,16 @@ class Transaction {
        
       },
       required: ["UserId"],
-      additionalProperties: false,
+      additionalProperties: true
   }
 
   constructor(id,UserId) {
 
     this.id = id;
     this.UserId = UserId;
-
+    this.products = [];
   }
+
 
 }
 

@@ -34,6 +34,7 @@ class SequelizeTransactionsRepository {
     };
 
     this.transactionModel = sequelizeClient.sequelize.define('Transaction', columns, options);
+    
 
   }
 
@@ -53,15 +54,25 @@ class SequelizeTransactionsRepository {
 
   }
 
-  async createTransaction(transaction) {
   
-    try {
-      const data = await this.transactionModel.create(transaction); 
-      return data.id;
-    } catch (error) {
-      console.log(error)
-    }
 
+  async createTransaction(transactionData, productData = []) {
+    try {
+
+      const transaction = await this.transactionModel.create(transactionData, {
+        include: [{ model: this.sequelizeClient.sequelize.models.Product, as: 'Products', through: 'product_transaction' }],
+      });
+  
+  
+      if (productData.length > 0) {
+        await transaction.setProducts(productData);
+      }
+
+      return transaction;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   async updateTransaction(transaction) {

@@ -69,7 +69,7 @@ function createUsersRouter(manageUsersUsecase) {
     
   });
   
-  router.post("/registrer", async (req, res) => {
+  router.post("/register", async (req, res) => {
     
     try {
       const validation = validateSchema(User.schema, req);
@@ -139,9 +139,23 @@ function createUsersRouter(manageUsersUsecase) {
 
         if (!userGet) {
           res.status(404).send("Usuario no encontrado.");
-        } else {
-          const user = await manageUsersUsecase.updateUser(id, req.body);
-          res.status(200).send(user);
+        } 
+        else {
+          const {name, email , password , is_admin} = req.body;
+          bcrypt.hash(password, 10).then(async (hash) => {
+            await manageUsersUsecase.updateUser(id,{
+              name: name,
+              password: hash,
+              email: email,
+              is_admin: is_admin
+            }).then(() => {
+              res.json("Usuario actualizado")
+            }).catch ((error) => {
+              if(error) {
+                res.status(400).json({error: error});
+              }
+            })
+          })
         }
       } else {
         res.status(422).send(validation);

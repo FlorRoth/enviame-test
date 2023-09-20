@@ -2,13 +2,13 @@ const express = require('express');
 const appRoot = require('app-root-path');
 const Product = require('../entities/product');
 const validateSchema = require(appRoot + "/src/frameworks/http/ajv");
-
+const { validateTokens } = require('../../JWT')
 
 function createProductsRouter(manageProductsUsecase) {
 
   const router = express.Router();
 
-  router.get("/products", async (req, res) => {
+  router.get("/products",validateTokens, async (req, res) => {
     try {
       const products = await manageProductsUsecase.getProducts();
       if (products.length === 0) {
@@ -23,7 +23,7 @@ function createProductsRouter(manageProductsUsecase) {
 
   });
 
-  router.get("/products/:id", async (req, res) => {
+  router.get("/products/:id",validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const product = await manageProductsUsecase.getProduct(id);
@@ -39,7 +39,7 @@ function createProductsRouter(manageProductsUsecase) {
     
   });
   
-  router.post("/products", async (req, res) => {
+  router.post("/products",validateTokens, async (req, res) => {
     try {
       validation = validateSchema(Product.schema, req);
     
@@ -56,7 +56,7 @@ function createProductsRouter(manageProductsUsecase) {
 
   });
 
-  router.put("/products/:id", async (req, res) => {
+  router.put("/products/:id",validateTokens, async (req, res) => {
 
     try {
       validation = validateSchema(Product.schema, req);
@@ -79,7 +79,7 @@ function createProductsRouter(manageProductsUsecase) {
 
   });
 
-  router.delete("/products/:id", async (req, res) => {
+  router.delete("/products/:id",validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const product = await manageProductsUsecase.getProduct(id);

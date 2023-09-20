@@ -2,13 +2,16 @@ const express = require('express');
 const appRoot = require('app-root-path');
 const User = require('../entities/user');
 const validateSchema = require(appRoot + "/src/frameworks/http/ajv");
+const bcrypt = require('bcrypt');
+const { createTokens, validateTokens } = require('../../JWT')
 
 
 function createUsersRouter(manageUsersUsecase) {
 
   const router = express.Router();
+  
 
-  router.get("/users", async (req, res) => {
+  router.get("/users",validateTokens, async (req, res) => {
     try {
       const users = await manageUsersUsecase.getUsers();
 
@@ -23,7 +26,7 @@ function createUsersRouter(manageUsersUsecase) {
 
   });
 
-  router.get("/users/:id", async (req, res) => {
+  router.get("/users/:id",validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const user = await manageUsersUsecase.getUser(id);
@@ -40,7 +43,7 @@ function createUsersRouter(manageUsersUsecase) {
     
   });
 
-  router.get("/users/type/:type_user", async (req, res) => {
+  router.get("/users/type/:type_user",validateTokens, async (req, res) => {
     try {
       const type_user = req.params.type_user;
       let users = [];
@@ -66,14 +69,28 @@ function createUsersRouter(manageUsersUsecase) {
     
   });
   
-  router.post("/users", async (req, res) => {
+  router.post("/registrer", async (req, res) => {
     
     try {
       const validation = validateSchema(User.schema, req);
 
       if (validation === true) {
-        const user = await manageUsersUsecase.createUser(req.body);
-        res.status(201).send(user);
+        const {name, email , password , is_admin} = req.body;
+        bcrypt.hash(password, 10).then(async (hash) => {
+           await manageUsersUsecase.createUser({
+            name: name,
+            password: hash,
+            email: email,
+            is_admin: is_admin
+          }).then(() => {
+            res.json("Usuario registrado")
+          }).catch ((error) => {
+            if(error) {
+              res.status(400).json({error: error});
+            }
+          })
+        })
+        
       } else {
         res.status(422).send(validation);
       }
@@ -83,7 +100,36 @@ function createUsersRouter(manageUsersUsecase) {
 
   });
 
-  router.put("/users/:id", async (req, res) => {
+  router.post("/login", async (req, res) => {
+    
+    try {
+        const {email, password } = req.body;
+        const user = await manageUsersUsecase.getUserEmail(email);
+
+        if(!user) {
+          res.status(400).json({error: "El usuario no existe"})
+        }
+        const dbPassword = user.password;
+        bcrypt.compare(password,dbPassword).then((match) =>{
+          if(!match){
+            res.status(400).json({error: "Combinación incorrecta de email y contraseña"});
+          }
+          else {
+            const accessToken = createTokens(user);
+            res.cookie("access-token", accessToken,{
+              maxAge: 60*60*42*7*1000,
+            });
+            res.json("Usuario conectado")
+          }
+        });
+        
+    } catch (error) {
+      res.status(500).send("Error interno del servidor: " + error.message);
+    }
+
+  });
+
+  router.put("/users/:id",validateTokens, async (req, res) => {
     
     try {
       validation = validateSchema(User.schema, req);
@@ -106,7 +152,7 @@ function createUsersRouter(manageUsersUsecase) {
 
   });
 
-  router.delete("/users/:id", async (req, res) => {
+  router.delete("/users/:id",validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const user = await manageUsersUsecase.getUser(id);

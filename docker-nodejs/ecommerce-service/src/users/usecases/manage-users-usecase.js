@@ -21,6 +21,10 @@ class ManageUsersUsecase {
     return await this.usersRepository.getUser(id);
   }
 
+  async getUserEmail(email) {
+    return await this.usersRepository.getUserEmail(email);
+  }
+
   async createUser(data) {
     
     const user = new User(undefined, data.name, data.email, data.password,data.is_admin)

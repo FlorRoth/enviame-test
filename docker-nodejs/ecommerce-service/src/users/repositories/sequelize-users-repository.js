@@ -89,6 +89,12 @@ class SequelizeUsersRepository {
 
   }
 
+  async getUserEmail(email) {
+
+    return await this.userModel.findOne({where: {email: email}});
+
+  }
+
   async createUser(user) {
 
     const data = await this.userModel.create(user);    

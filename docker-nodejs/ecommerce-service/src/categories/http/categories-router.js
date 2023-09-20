@@ -2,13 +2,13 @@ const express = require('express');
 const appRoot = require('app-root-path');
 const Category = require('../entities/category');
 const validateSchema = require(appRoot + "/src/frameworks/http/ajv");
-
+const { validateTokens } = require('../../JWT')
 
 function createCategoriesRouter(manageCategoriesUsecase) {
 
   const router = express.Router();
 
-  router.get("/categories", async (req, res) => {
+  router.get("/categories",validateTokens, async (req, res) => {
     try {
         const categories = await manageCategoriesUsecase.getCategories();
         if (categories.length === 0) {
@@ -24,7 +24,7 @@ function createCategoriesRouter(manageCategoriesUsecase) {
 
   });
 
-  router.get("/categories/:id", async (req, res) => {
+  router.get("/categories/:id",validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const category = await manageCategoriesUsecase.getCategory(id);
@@ -41,7 +41,7 @@ function createCategoriesRouter(manageCategoriesUsecase) {
     
   });
 
-  router.get("/categories/buyer/:buyer_id", async (req, res) => {
+  router.get("/categories/buyer/:buyer_id",validateTokens, async (req, res) => {
     try {
       const buyer_id = req.params.buyer_id;
       const categories = await manageCategoriesUsecase.getCategoryBuyer(buyer_id);
@@ -57,7 +57,7 @@ function createCategoriesRouter(manageCategoriesUsecase) {
 
   });
   
-  router.post("/categories", async (req, res) => {
+  router.post("/categories",validateTokens, async (req, res) => {
     try {
         validation = validateSchema(Category.schema, req);
         
@@ -74,7 +74,7 @@ function createCategoriesRouter(manageCategoriesUsecase) {
 
   });
 
-  router.put("/categories/:id", async (req, res) => {
+  router.put("/categories/:id",validateTokens, async (req, res) => {
     try {
       validation = validateSchema(Category.schema, req);
       if (validation === true) {
@@ -96,7 +96,7 @@ function createCategoriesRouter(manageCategoriesUsecase) {
 
   });
 
-  router.delete("/categories/:id", async (req, res) => {
+  router.delete("/categories/:id",validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const category = await manageCategoriesUsecase.getCategory(id);

@@ -2,13 +2,13 @@ const express = require('express');
 const appRoot = require('app-root-path');
 const Transaction = require('../entities/transaction');
 const validateSchema = require(appRoot + "/src/frameworks/http/ajv");
-
+const { validateTokens } = require('../../JWT')
 
 function createTransactionsRouter(manageTransactionsUsecase) {
 
   const router = express.Router();
 
-  router.get("/transactions", async (req, res) => {
+  router.get("/transactions", validateTokens, async (req, res) => {
     try {
       const transactions = await manageTransactionsUsecase.getTransactions();
       if (transactions.length === 0) {
@@ -21,7 +21,7 @@ function createTransactionsRouter(manageTransactionsUsecase) {
     }
   });
 
-  router.get("/transactions/:id", async (req, res) => {
+  router.get("/transactions/:id", validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const transaction = await manageTransactionsUsecase.getTransaction(id);
@@ -36,7 +36,7 @@ function createTransactionsRouter(manageTransactionsUsecase) {
     
   });
 
-  router.get("/transactions/users/:type_user", async (req, res) => {
+  router.get("/transactions/users/:type_user", validateTokens, async (req, res) => {
     try { 
       const type_user = req.params.type_user;
       let transactions  = [];
@@ -63,7 +63,7 @@ function createTransactionsRouter(manageTransactionsUsecase) {
     
   });
   
-  router.post("/transactions", async (req, res) => {
+  router.post("/transactions", validateTokens, async (req, res) => {
     try {
       const validation = validateSchema(Transaction.schema, req);
       
@@ -81,7 +81,7 @@ function createTransactionsRouter(manageTransactionsUsecase) {
 
   });
 
-  router.put("/transactions/:id", async (req, res) => {
+  router.put("/transactions/:id", validateTokens, async (req, res) => {
     try {
       const validation = validateSchema(Transaction.schema, req);
       if (validation === true) {
@@ -102,7 +102,7 @@ function createTransactionsRouter(manageTransactionsUsecase) {
 
   });
 
-  router.delete("/transactions/:id", async (req, res) => {
+  router.delete("/transactions/:id", validateTokens, async (req, res) => {
     try {
       const id = req.params.id;
       const transaction= await manageTransactionsUsecase.getTransaction(id);

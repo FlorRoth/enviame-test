@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 // Módulo para crear una aplicación en Express
 // recibiendo las dependencias externamente.
@@ -12,6 +13,7 @@ async function createExpressApp(routers) {
   // Configuraciones varias.
 
   app.use(express.json());
+  app.use(cookieParser());
 
   // Usar rutas recibidas.
 

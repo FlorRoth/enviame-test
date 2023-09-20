@@ -70,7 +70,7 @@ class SequelizeProductsRepository {
       const data = await this.productModel.create(product); 
       return data.id;
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
 
   }
@@ -88,7 +88,6 @@ class SequelizeProductsRepository {
   }
 
   async updateProductStatus(product,quantity) {
-    console.log(quantity)
     const options = {
       where: {
         id: product.id,

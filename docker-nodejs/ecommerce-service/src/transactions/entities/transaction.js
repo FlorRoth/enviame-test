@@ -8,7 +8,7 @@ class Transaction {
         UserId: { type: "integer",errorMessage:'must be of integer type'},
         products: { 
           type: "array", 
-          items: { type: "integer" }, // Indicar que es un array de enteros
+          items: { type: "integer" }, 
           errorMessage: 'must be an array of integers' 
         },
       },

@@ -31,6 +31,10 @@ class SequelizeProductsRepository {
       status: {
         type: DataTypes.ENUM('active', 'inactive'),
         defaultValue: 'active'
+      },
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       }
 
     };

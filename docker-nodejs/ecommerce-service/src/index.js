@@ -35,14 +35,14 @@ const SequelizeTransactionsRepository = require('./transactions/repositories/seq
 const sequelizeClient = new SequelizeClient();
 
 const sequelizeBooksRepository = new SequelizeBooksRepository(sequelizeClient);
-const sequelizeUsersRepository = new SequelizeUsersRepository(sequelizeClient);
 const sequelizeCategoriesRepository = new SequelizeCategoriesRepository(sequelizeClient);
 const sequelizeProductsRepository = new SequelizeProductsRepository(sequelizeClient);
 const sequelizeTransactionsRepository = new SequelizeTransactionsRepository(sequelizeClient);
+const sequelizeUsersRepository = new SequelizeUsersRepository(sequelizeClient);
 
 //Relaciones
 
-sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Product);
+sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Product,{ foreignKey: 'UserId', as: 'products' });
 
 sequelizeClient.sequelize.models.Product.belongsTo(sequelizeClient.sequelize.models.User);
 
@@ -52,7 +52,7 @@ sequelizeClient.sequelize.models.Category.hasMany(sequelizeClient.sequelize.mode
  sequelizeClient.sequelize.models.Product.belongsTo(sequelizeClient.sequelize.models.Category);
 
 
-sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Transaction);
+sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Transaction,{ foreignKey: 'UserId', as: 'transactions' });
 
 sequelizeClient.sequelize.models.Transaction.belongsTo(sequelizeClient.sequelize.models.User);
 
@@ -63,6 +63,8 @@ sequelizeClient.sequelize.models.Transaction.belongsToMany(sequelizeClient.seque
 sequelizeClient.sequelize.models.Product.belongsToMany(sequelizeClient.sequelize.models.Transaction, {
   through: 'product_transaction',
 });
+
+
 
 
 

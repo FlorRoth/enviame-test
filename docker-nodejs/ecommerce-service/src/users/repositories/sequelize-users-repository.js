@@ -37,6 +37,8 @@ class SequelizeUsersRepository {
     };
 
     this.userModel = sequelizeClient.sequelize.define('User', columns, options);
+    this.productModel = sequelizeClient.sequelize.models.Product
+    this.transactionModel = sequelizeClient.sequelize.models.Transaction
 
   }
 
@@ -46,6 +48,37 @@ class SequelizeUsersRepository {
       raw: true
     });
 
+    return users;
+
+  }
+  async getUsersSeller() {
+    const users = await this.userModel.findAll({
+      attributes: ['id', 'name', 'email'],
+      include: [{
+        model: this.productModel, 
+        as: 'products',
+        required: true,
+        attributes: []
+      }],
+      raw: true,
+      group: ['User.id']
+    });
+    return users;
+
+  }
+
+  async getUsersBuyer() {
+    const users = await this.userModel.findAll({
+      attributes: ['id', 'name', 'email'],
+      include: [{
+        model: this.transactionModel, 
+        as: 'transactions',
+        required: true,
+        attributes: []
+      }],
+      raw: true,
+      group: ['User.id']
+    });
     return users;
 
   }

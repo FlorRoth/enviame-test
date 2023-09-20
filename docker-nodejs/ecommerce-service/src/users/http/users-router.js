@@ -9,7 +9,7 @@ function createUsersRouter(manageUsersUsecase) {
   const router = express.Router();
 
   router.get("/users", async (req, res) => {
-
+    
     const users = await manageUsersUsecase.getUsers();
     res.status(200).send(users);
 
@@ -21,6 +21,20 @@ function createUsersRouter(manageUsersUsecase) {
     const user = await manageUsersUsecase.getUser(id);
     
     res.status(200).send(user);
+    
+  });
+
+  router.get("/users/type/:type_user", async (req, res) => {
+    const type_user = req.params.type_user;
+    let users = [];
+    if(type_user === 'seller'){
+       users = await manageUsersUsecase.getUsersSeller();
+    }
+    else if (type_user === 'buyer') {
+      users = await manageUsersUsecase.getUsersBuyer();
+    }
+    
+    res.status(200).send(users);
     
   });
   

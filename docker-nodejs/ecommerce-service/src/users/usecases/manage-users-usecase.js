@@ -10,6 +10,12 @@ class ManageUsersUsecase {
   async getUsers() {
     return await this.usersRepository.getUsers();
   }
+  async getUsersSeller() {
+    return await this.usersRepository.getUsersSeller();
+  }
+  async getUsersBuyer() {
+    return await this.usersRepository.getUsersBuyer();
+  }
 
   async getUser(id) {
     return await this.usersRepository.getUser(id);

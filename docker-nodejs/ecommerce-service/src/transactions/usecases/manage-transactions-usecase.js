@@ -3,9 +3,10 @@ const Transaction = require('../entities/transaction');
 
 class ManageTransactionsUsecase {
 
-  constructor(transactionsRepository,userRepository) {
+  constructor(transactionsRepository,userRepository,productsRepository) {
     this.transactionsRepository = transactionsRepository;
     this.userRepository = userRepository;
+    this.productsRepository = productsRepository;
   }
 
   async getTransactions() {
@@ -30,9 +31,17 @@ class ManageTransactionsUsecase {
     if (!user) {
       throw new Error('El usuario especificado no existe.');
     }
-    
-    const transaction = new Transaction(undefined, data.UserId)
-    const id = await this.transactionsRepository.createTransaction(transaction, data.products.length > 0 ? data.products : []);
+    const productIds = data.products || [];
+
+    await Promise.all(productIds.map(async (productId) => {
+      const productExists = await this.productsRepository.getProduct(productId);
+      if (!productExists) {
+        throw new Error(`El producto ${productId} no existe.`);
+      }
+    }));
+
+    const transaction = new Transaction(undefined, data.UserId, data.products ?? []);
+    const id = await this.transactionsRepository.createTransaction(transaction);
   
     transaction.id = id;
     return transaction;
@@ -47,13 +56,18 @@ class ManageTransactionsUsecase {
     }
 
 
-    const transaction = new Transaction(id ,data.UserId);
+    const productIds = data.products || [];
 
-    if (data.products && data.products.length > 0) {
-      await this.transactionsRepository.updateTransaction(transaction, data.products);
-    } else {
-      await this.transactionsRepository.updateTransaction(transaction, []);
-    }
+    await Promise.all(productIds.map(async (productId) => {
+      const productExists = await this.productsRepository.getProduct(productId);
+      if (!productExists) {
+        throw new Error(`El producto ${productId} no existe.`);
+      }
+    }));
+
+    const transaction = new Transaction(id  ,data.UserId, data.products ?? []);
+    await this.transactionsRepository.updateTransaction(transaction, data.products);
+
 
     return transaction;
 

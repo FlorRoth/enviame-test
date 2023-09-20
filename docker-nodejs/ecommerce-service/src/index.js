@@ -65,8 +65,8 @@ sequelizeClient.syncDatabase();
 
 const manageUsersUsecase = new ManageUsersUsecase(sequelizeUsersRepository);
 const manageCategoriesUsecase = new ManageCategoriesUsecase(sequelizeCategoriesRepository);
-const manageProductsUsecase = new ManageProductsUsecase(sequelizeProductsRepository);
-const manageTransactionsUsecase = new ManageTransactionsUsecase(sequelizeTransactionsRepository);
+const manageProductsUsecase = new ManageProductsUsecase(sequelizeProductsRepository,sequelizeUsersRepository,sequelizeCategoriesRepository);
+const manageTransactionsUsecase = new ManageTransactionsUsecase(sequelizeTransactionsRepository,sequelizeUsersRepository,sequelizeProductsRepository);
 
 let routers = [
   createUsersRouter(manageUsersUsecase),

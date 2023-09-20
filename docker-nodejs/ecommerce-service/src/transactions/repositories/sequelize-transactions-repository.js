@@ -89,17 +89,17 @@ class SequelizeTransactionsRepository {
 
   }
 
-  async createTransaction(transactionData, productData = []) {
+  async createTransaction(transactionData) {
     try {
 
-      const transaction = await this.transactionModel.create(transactionData, {
-        include: [{ model: this.sequelizeClient.sequelize.models.Product, as: 'products', through: 'product_transaction' }],
+      const existingProducts = await this.sequelizeClient.sequelize.models.Product.findAll({
+        where: { id: transactionData.products },
       });
-  
-  
-      if (productData.length > 0) {
-        await transaction.setProducts(productData);
-      }
+
+
+      const transaction = await this.transactionModel.create(transactionData);
+
+      await transaction.addProducts(existingProducts);
 
       return transaction;
     } catch (error) {
@@ -108,15 +108,18 @@ class SequelizeTransactionsRepository {
     }
   }
 
-  async updateTransaction(transaction) {
-
-    const options = {
-      where: {
-        id: transaction.id,
-      }
-    };
-
-    await this.transactionModel.update(transaction, options);
+  async updateTransaction(transactionData) {
+    try {
+      const existingProducts = await this.sequelizeClient.sequelize.models.Product.findAll({
+        where: { id: transactionData.products },
+      });
+      const existingTransaction = await this.transactionModel.findByPk(transactionData.id);
+      await existingTransaction.update(transactionData);
+      await existingTransaction.setProducts(existingProducts);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 
   }
 

@@ -6,17 +6,21 @@ class Transaction {
     type: "object",
       properties: {
         UserId: { type: "integer",errorMessage:'must be of integer type'},
-       
+        products: { 
+          type: "array", 
+          items: { type: "integer" }, // Indicar que es un array de enteros
+          errorMessage: 'must be an array of integers' 
+        },
       },
-      required: ["UserId"],
+      required: ["UserId","products"],
       additionalProperties: true
   }
 
-  constructor(id,UserId) {
+  constructor(id, UserId, products) {
 
     this.id = id;
     this.UserId = UserId;
-    this.products = [];
+    this.products = products;
   }
 
 

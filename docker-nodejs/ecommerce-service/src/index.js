@@ -2,20 +2,19 @@ const createExpressApp = require('./frameworks/http/express');
 
 const SequelizeClient = require('./frameworks/db/sequelize');
 
-const createBooksRouter = require('./books/http/books-router');
+
 const createUsersRouter = require('./users/http/users-router');
 const createCategoriesRouter = require('./categories/http/categories-router');
 const createProductsRouter = require('./products/http/products-router');
 const createTransactionsRouter = require('./transactions/http/transactions-router');
 
-const ManageBooksUsecase = require('./books/usecases/manage-books-usecase');
+
 const ManageUsersUsecase = require('./users/usecases/manage-users-usecase');
 const ManageCategoriesUsecase = require('./categories/usecases/manage-categories-usecase');
 const ManageProductsUsecase = require('./products/usecases/manage-products-usecase');
 const ManageTransactionsUsecase = require('./transactions/usecases/manage-transactions-usecase');
 
 
-const SequelizeBooksRepository = require('./books/repositories/sequelize-books-repository');
 const SequelizeUsersRepository = require('./users/repositories/sequelize-users-repository');
 const SequelizeCategoriesRepository = require('./categories/repositories/sequelize-categories-repository');
 const SequelizeProductsRepository = require('./products/repositories/sequelize-products-repository');
@@ -34,7 +33,7 @@ const SequelizeTransactionsRepository = require('./transactions/repositories/seq
 
 const sequelizeClient = new SequelizeClient();
 
-const sequelizeBooksRepository = new SequelizeBooksRepository(sequelizeClient);
+
 const sequelizeCategoriesRepository = new SequelizeCategoriesRepository(sequelizeClient);
 const sequelizeProductsRepository = new SequelizeProductsRepository(sequelizeClient);
 const sequelizeTransactionsRepository = new SequelizeTransactionsRepository(sequelizeClient);
@@ -72,14 +71,13 @@ sequelizeClient.sequelize.models.Product.belongsToMany(sequelizeClient.sequelize
 
 sequelizeClient.syncDatabase();
 
-const manageBooksUsecase = new ManageBooksUsecase(sequelizeBooksRepository);
+
 const manageUsersUsecase = new ManageUsersUsecase(sequelizeUsersRepository);
 const manageCategoriesUsecase = new ManageCategoriesUsecase(sequelizeCategoriesRepository);
 const manageProductsUsecase = new ManageProductsUsecase(sequelizeProductsRepository);
 const manageTransactionsUsecase = new ManageTransactionsUsecase(sequelizeTransactionsRepository);
 
 let routers = [
-  createBooksRouter(manageBooksUsecase),
   createUsersRouter(manageUsersUsecase),
   createCategoriesRouter(manageCategoriesUsecase),
   createProductsRouter(manageProductsUsecase),

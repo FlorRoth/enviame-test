@@ -22,15 +22,6 @@ const SequelizeTransactionsRepository = require('./transactions/repositories/seq
 
 
 
-
-// Instanciar dependencias.
-
-// En el caso de uso de de libros, es es posible pasarle como parámetro el repositorio
-// de Firestore o el repositorio con Sequelize, y en ambos casos debería funcionar,
-// incluso si el cambio se hace mientras la aplicación está en ejecución.
-
-
-
 const sequelizeClient = new SequelizeClient();
 
 
@@ -84,6 +75,6 @@ let routers = [
   createTransactionsRouter(manageTransactionsUsecase)
 ];
   
-// Crear aplicación Express con dependencias inyectadas.
+
 
 const app = createExpressApp(routers);

@@ -1,4 +1,4 @@
-// Entidad usuario
+
 
 class User {
 

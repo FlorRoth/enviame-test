@@ -15,6 +15,10 @@ class ManageTransactionsUsecase {
     return await this.transactionsRepository.getTransaction(id);
   }
 
+  async getTransactionsBuyer() {
+    return await this.transactionsRepository.getTransactionsBuyer();
+  }
+
   async getTransactionsSeller() {
     return await this.transactionsRepository.getTransactionsSeller();
   }
@@ -27,16 +31,12 @@ class ManageTransactionsUsecase {
     transaction.id = id;
     return transaction;
     
-
   }
 
   async updateTransaction(id, data) {
 
     const transaction = new Transaction(id ,data.UserId);
-    await this.transactionsRepository.updateTransaction(transaction);
-    if (data.products && data.products.length > 0) {
-      transaction.addProducts(data.products);
-    }
+    await this.transactionsRepository.updateTransaction(transaction, data.products.length > 0 ? data.products : []);
 
     return transaction;
 

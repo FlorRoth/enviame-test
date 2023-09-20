@@ -23,6 +23,18 @@ function createTransactionsRouter(manageTransactionsUsecase) {
     res.status(200).send(transaction);
     
   });
+  router.get("/transactions/users/:type_user", async (req, res) => {
+    const type_user = req.params.type_user;
+    let transaction  = [];
+    if(type_user === 'seller'){
+       transaction =  await manageTransactionsUsecase.getTransactionsSeller();
+    }
+    else if (type_user === 'buyer') {
+      transaction =  await manageTransactionsUsecase.getTransactionsBuyer();
+    }
+    res.status(200).send(transaction);
+    
+  });
   
   router.post("/transactions", async (req, res) => {
     

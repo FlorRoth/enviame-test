@@ -54,7 +54,40 @@ class SequelizeTransactionsRepository {
 
   }
 
-  
+  async getTransactionsBuyer() {
+    const transactions = await this.transactionModel.findAll({
+      include: [{
+        model: this.sequelizeClient.sequelize.models.User,
+        as: 'users',
+        required: true,
+        attributes: []
+      }],
+      raw: true
+    });
+
+    return transactions;
+
+  }
+  async getTransactionsSeller() {
+    const transactions = await this.transactionModel.findAll({
+      include: [{
+        model: this.sequelizeClient.sequelize.models.User,
+        as: 'users',
+        required: true,
+        attributes: [],
+        include: [{
+          model: this.sequelizeClient.sequelize.models.Product, 
+          as: 'products',
+          required: true,
+          attributes: []
+        }],
+      }],
+      raw: true
+    });
+
+    return transactions;
+
+  }
 
   async createTransaction(transactionData, productData = []) {
     try {

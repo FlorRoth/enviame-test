@@ -38,6 +38,13 @@ class ManageTransactionsUsecase {
       if (!productExists) {
         throw new Error(`El producto ${productId} no existe.`);
       }
+      if (productExists.quantity === 0) {
+        throw new Error(`El producto ${productId} está agotado.`);
+      }
+      const quantity = productExists.quantity-1;
+      await this.productsRepository.updateProductStatus(productExists,quantity);
+
+  
     }));
 
     const transaction = new Transaction(undefined, data.UserId, data.products ?? []);
@@ -63,6 +70,11 @@ class ManageTransactionsUsecase {
       if (!productExists) {
         throw new Error(`El producto ${productId} no existe.`);
       }
+      if (productExists.quantity === 0) {
+        throw new Error(`El producto ${productId} está agotado.`);
+      }
+      const quantity = productExists.quantity-1;
+      await this.productsRepository.updateProductStatus(productExists,quantity);
     }));
 
     const transaction = new Transaction(id  ,data.UserId, data.products ?? []);

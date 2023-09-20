@@ -87,6 +87,25 @@ class SequelizeProductsRepository {
 
   }
 
+  async updateProductStatus(product,quantity) {
+    console.log(quantity)
+    const options = {
+      where: {
+        id: product.id,
+      }
+    };
+    const productData = {
+      name: product.name,
+      description: product.description,
+      quantity: quantity > 0 ? quantity : 0,
+      status: quantity > 0 ? 'active' : 'inactive',
+      UserId: product.UserId
+    }
+
+    await this.productModel.update(productData, options);
+
+  }
+
   async deleteProduct(id) {
 
     const options = {

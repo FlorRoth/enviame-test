@@ -23,6 +23,15 @@ function createCategoriesRouter(manageCategoriesUsecase) {
     res.status(200).send(category);
     
   });
+
+  router.get("/categories/buyer/:buyer_id", async (req, res) => {
+
+    const buyer_id = req.params.buyer_id;
+    const category = await manageCategoriesUsecase.getCategoryBuyer(buyer_id);
+    
+    res.status(200).send(category)
+
+  });
   
   router.post("/categories", async (req, res) => {
     

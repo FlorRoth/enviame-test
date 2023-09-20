@@ -15,6 +15,10 @@ class ManageCategoriesUsecase {
     return await this.categoriesRepository.getCategory(id);
   }
 
+  async getCategoryBuyer(buyer_id) {
+    return await this.categoriesRepository.getCategoryBuyer(buyer_id);
+  }
+
   async createCategory(data) {
     
     const category = new Category(undefined, data.name, data.description)

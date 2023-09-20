@@ -53,6 +53,38 @@ class SequelizeCategoriesRepository {
     return await this.categoryModel.findByPk(id);
 
   }
+  async getCategoryBuyer(buyer_id) {
+    const categories = await this.categoryModel.findAll({
+      attributes: ['id', 'name'],
+      include: [
+        {
+          model: this.sequelizeClient.sequelize.models.Product, 
+          as: 'products',
+          attributes: [],
+          required: true,
+          include: [
+            {
+              model: this.sequelizeClient.sequelize.models.Transaction, 
+              as: 'transactions',
+              required: true,
+              where: {
+                UserId: buyer_id,
+              },
+              through: {
+                attributes: []
+              },
+              attributes: []
+            }
+          ],
+        },
+      ],
+      raw: true,
+      group: ['Category.id']
+    });
+  
+    return categories;
+  }
+  
 
   async createCategory(category) {
 

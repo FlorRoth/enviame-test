@@ -93,7 +93,7 @@ class SequelizeTransactionsRepository {
     try {
 
       const transaction = await this.transactionModel.create(transactionData, {
-        include: [{ model: this.sequelizeClient.sequelize.models.Product, as: 'Products', through: 'product_transaction' }],
+        include: [{ model: this.sequelizeClient.sequelize.models.Product, as: 'products', through: 'product_transaction' }],
       });
   
   

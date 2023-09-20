@@ -47,21 +47,23 @@ sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.P
 sequelizeClient.sequelize.models.Product.belongsTo(sequelizeClient.sequelize.models.User);
 
 
-sequelizeClient.sequelize.models.Category.hasMany(sequelizeClient.sequelize.models.Product);
+sequelizeClient.sequelize.models.Category.hasMany(sequelizeClient.sequelize.models.Product,{ foreignKey: 'CategoryId', as: 'products' });
 
- sequelizeClient.sequelize.models.Product.belongsTo(sequelizeClient.sequelize.models.Category);
+ sequelizeClient.sequelize.models.Product.belongsTo(sequelizeClient.sequelize.models.Category,{ foreignKey: 'CategoryId', as: 'category' });
 
 
-sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Transaction,{ foreignKey: 'UserId', as: 'transactions' });
+sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Transaction);
 
-sequelizeClient.sequelize.models.Transaction.belongsTo(sequelizeClient.sequelize.models.User);
+sequelizeClient.sequelize.models.Transaction.belongsTo(sequelizeClient.sequelize.models.User,{ foreignKey: 'UserId', as: 'users' });
 
 sequelizeClient.sequelize.models.Transaction.belongsToMany(sequelizeClient.sequelize.models.Product, {
   through: 'product_transaction',
+  as: 'products'
 });
 
 sequelizeClient.sequelize.models.Product.belongsToMany(sequelizeClient.sequelize.models.Transaction, {
   through: 'product_transaction',
+  as: 'transactions'
 });
 
 

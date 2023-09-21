@@ -11,7 +11,7 @@ function createUsersRouter(manageUsersUsecase) {
   const router = express.Router();
   
 
-  router.get("/users",validateTokens, async (req, res) => {
+  router.get("/users", async (req, res) => {
     try {
       const users = await manageUsersUsecase.getUsers();
 

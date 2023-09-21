@@ -23,8 +23,7 @@ Run ```docker-compose``` command inside **docker-nodejs** folder.
     
 #### Testing
     Endpoints can be tested with the attached postman collection.
-
-
+    Disclaimer: get users endpoint is unprotected so it's easy for the tester to get user data and login/test.
 
 
 

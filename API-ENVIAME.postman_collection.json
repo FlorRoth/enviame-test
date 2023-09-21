@@ -458,7 +458,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete category by id Copy",
+					"name": "Delete products by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],

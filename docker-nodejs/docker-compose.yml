@@ -32,5 +32,9 @@ services:
       - MYSQL_DATABASE=${ECOMMERCE_MYSQL_DATABASE}
     ports:
       - ${ECOMMERCE_MYSQL_PORT}:3306
-    command: 
-      - --default-authentication-plugin=mysql_native_password
+    command: ["--default-authentication-plugin=mysql_native_password", "--init-file", "/docker-entrypoint-initdb.d/init.sql"]
+    volumes:
+      - db_data:/var/lib/mysql
+      - .docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+    db_data:

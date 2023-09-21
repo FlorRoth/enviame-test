@@ -30,8 +30,6 @@ const sequelizeProductsRepository = new SequelizeProductsRepository(sequelizeCli
 const sequelizeTransactionsRepository = new SequelizeTransactionsRepository(sequelizeClient);
 const sequelizeUsersRepository = new SequelizeUsersRepository(sequelizeClient);
 
-//Relaciones
-
 sequelizeClient.sequelize.models.User.hasMany(sequelizeClient.sequelize.models.Product,{ foreignKey: 'UserId', as: 'products' });
 
 sequelizeClient.sequelize.models.Product.belongsTo(sequelizeClient.sequelize.models.User);
